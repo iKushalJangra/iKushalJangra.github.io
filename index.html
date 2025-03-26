@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Dashboard</title>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #007BFF;
+            color: white;
+            z-index: 1000;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 5px;
+            font-size: 16px;
+        }
+        .search-bar button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 5px;
+        }
+
+        /* Edge Panel */
+        .edge-panel {
+            width: 60px;
+            background-color: #007BFF;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            transition: width 0.4s ease-in-out;
+            overflow: hidden;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 60px;
+            left: 0;
+        }
+        .edge-panel:hover {
+            width: 200px;
+        }
+        .edge-panel a {
+            text-decoration: none;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .edge-panel a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        .icon {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+        .edge-panel:hover .icon {
+            transform: rotate(360deg);
+        }
+        .text {
+            display: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .edge-panel:hover .text {
+            display: inline;
+            opacity: 1;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 60px;
+            margin-top: 80px;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Upcoming Appointment */
+        .upcoming-appointment {
+            width: 350px;
+            background-color: #007BFF;
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .upcoming-appointment:hover {
+            box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.2);
+        }
+        .upcoming-appointment h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            margin-top: 0;
+        }
+        .details p {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        .button-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        button {
+            background-color: white;
+            color: #007BFF;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        button:hover {
+            background-color: #0056b3;
+            color: white;
+            transform: scale(1.08);
+        }
+
+        /* Health Summary */
+        .health-summary {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 300px;
+        }
+        .health-summary h2 {
+            margin-bottom: 15px;
+            color: #007BFF;
+        }
+        .metrics {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .metric {
+            flex: 1;
+            min-width: 200px;
+            background: #007BFF;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .metric h3 {
+            margin: 10px 0 5px;
+            display: flex;
+            align-items: center;
+        }
+        .metric i {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* Medication Reminder */
+        .medication-reminder {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 450px;
+        }
+        .medication-reminder h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #007BFF;
+            text-align: center;
+        }
+        .reminder-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background: #ffffff;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.12);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .reminder-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .reminder-item span {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Recent Activity */
+        .recent-activity {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 300px;
+        }
+        .recent-activity h2 {
+            text-align: center;
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .activity {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .activity:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .icon {
+            width: 30px;
+            height: 30px;
+            background: #007BFF;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .text {
+            flex: 1;
+        }
+        .text p {
+            margin: 0;
+            font-size: 12px;
+            color: #666;
+        }
+        .text strong {
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* Premium Feature */
+        .premium-feature {
+            background: linear-gradient(135deg, #007BFF, #00BFFF);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .premium-feature h2 {
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+        .premium-feature p {
+            margin-bottom: 25px;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        .premium-feature .features {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 25px;
+        }
+        .premium-feature .feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .premium-feature .feature i {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .premium-feature .feature h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .premium-feature .cta-button {
+            background: white;
+            color: #007BFF;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .premium-feature .cta-button:hover {
+            background: #007BFF;
+            color: white;
+            border: 2px solid white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Medical Portal</h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <button>🔍</button>
+        </div>
+    </div>
+
+    <!-- Edge Panel -->
+    <a href="appointment.html"><i class="fas fa-calendar-alt icon"></i><span class="text">Appointments</span></a> 
+    <div class="edge-panel">
+        <a href="#"><i class="fas fa-home icon"></i><span class="text">Home</span></a>
+        <a href="./appointment.html"><i class="fas fa-calendar-alt icon"></i><span class="text">Appointments</span></a>
+        <a href="records.html"><i class="fas fa-file-medical icon"></i><span class="text">Records</span></a>
+        <a href="medication.html"><i class="fas fa-pills icon"></i><span class="text">Medications</span></a>
+        <a href="vitals.html"><i class="fas fa-heartbeat icon"></i><span class="text">Vitals</span></a>
+        <a href="profile.html"><i class="fas fa-user icon"></i><span class="text">Profile</span></a>
+        <a href="setting.html"><i class="fas fa-cog icon"></i><span class="text">Settings</span></a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Upcoming Appointment -->
+        <div class="upcoming-appointment">
+            <h2><i class="fas fa-calendar-alt"></i> Upcoming Appointment</h2>
+            <div class="details">
+                <p><i class="fas fa-user-md"></i> <strong>Doctor:</strong> Dr. Sarah Johnson</p>
+                <p><i class="fas fa-clock"></i> <strong>In:</strong> 2 days</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Date:</strong> Wednesday, 15 May 2024</p>
+                <p><i class="fas fa-clock"></i> <strong>Time:</strong> 10:30 AM - 11:15 AM</p>
+                <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Oakwood Medical Center</p>
+                <p><i class="fas fa-video"></i> <strong>Consultation:</strong> Virtual consultation available</p>
+            </div>
+            <div class="button-container">
+                <button><i class="fas fa-calendar-plus"></i> Reschedule</button>
+                <button><i class="fas fa-video"></i> Join Virtual</button>
+            </div>
+        </div>
+
+        <!-- Health Summary -->
+        <div class="health-summary">
+            <h2>Health Summary</h2>
+            <div class="metrics">
+                <div class="metric">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Heart Rate</h3>
+                    <p>72 bpm (Normal)</p>
+                </div>
+                <div class="metric">
+                    <i class="fas fa-thermometer-half"></i>
+                    <h3>Temperature</h3>
+                    <p>98.6°F (Normal)</p>
+                </div>
+                <div class="metric">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3>Blood Pressure</h3>
+                    <p>120/80 mmHg (Normal)</p>
+                </div>
+                <div class="metric">
+                    <i class="fas fa-lungs"></i>
+                    <h3>Oxygen Level</h3>
+                    <p>98% (Normal)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medication Reminder -->
+        <div class="medication-reminder">
+            <h2>Medication Reminders</h2>
+            <div class="reminder-item">
+                <span>Amoxicillin - 500mg</span>
+                <span>8:00 AM</span>
+            </div>
+            <div class="reminder-item">
+                <span>Vitamin D - 2000 IU</span>
+                <span>12:00 PM</span>
+            </div>
+            <div class="reminder-item">
+                <span>Ibuprofen - 400mg</span>
+                <span>6:00 PM</span>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="recent-activity">
+            <h2>Recent Activity</h2>
+            <div class="activity">
+                <div class="icon">📅</div>
+                <div class="text">
+                    <strong>Appointment Scheduled</strong>
+                    <p>With Dr. Sarah Johnson - 15 May 2024</p>
+                </div>
+            </div>
+            <div class="activity">
+                <div class="icon">💊</div>
+                <div class="text">
+                    <strong>Medication Reminder</strong>
+                    <p>Amoxicillin 500mg - 8:00 AM</p>
+                </div>
+            </div>
+            <div class="activity">
+                <div class="icon">🩺</div>
+                <div class="text">
+                    <strong>Health Checkup</strong>
+                    <p>Blood Pressure: Normal (120/80 mmHg)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Feature -->
+        <div class="premium-feature">
+            <h2>PREMIUM FEATURE</h2>
+            <p>Connect with specialists anytime. Get 24/7 access to certified medical professionals and personalized care.</p>
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-file-medical"></i>
+                    <h3>View Records</h3>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-video"></i>
+                    <h3>Try Virtual Visit</h3>
+                </div>
+            </div>
+            <a href="#" class="cta-button">Upgrade to Premium</a>
+        </div>
+    </div>
+</body>
+</html>

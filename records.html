@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare - Medical Records</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .records-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .records-section h1 {
+            margin-bottom: 15px;
+            color: #007BFF;
+        }
+        .record-card {
+            background: #f1f8ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .record-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .record-card h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #007BFF;
+        }
+        .record-card p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+        .record-card .details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .record-card button {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+        .record-card button:hover {
+            background: #0056b3;
+        }
+        .record-card button.join {
+            background: #28a745;
+        }
+        .record-card button.join:hover {
+            background: #218838;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .status.completed {
+            background: #28a745;
+        }
+        .status.pending {
+            background: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="records-section">
+        <h1><i class="fas fa-file-medical-alt"></i> Medical Records</h1>
+        <div class="record-list">
+            <!-- Sample medical record card -->
+            <div class="record-card">
+                <h2>X-Ray</h2>
+                <p><i class="fas fa-calendar-day"></i> 2023-11-28</p>
+                <p><i class="fas fa-user-md"></i> Dr. Michael Chen</p>
+                <p><i class="fas fa-hospital"></i> Radiology</p>
+                <div class="details">
+                    <span class="status completed">Completed</span>
+                    <button><i class="fas fa-file-signature"></i> View</button>
+                </div>
+            </div>
+            <!-- More record cards -->
+            <div class="record-card">
+                <h2>Physical Examination</h2>
+                <p><i class="fas fa-calendar-day"></i> 2023-10-05</p>
+                <p><i class="fas fa-user-md"></i> Dr. Emily Wilson</p>
+                <p><i class="fas fa-hospital"></i> General Medicine</p>
+                <div class="details">
+                    <span class="status completed">Completed</span>
+                    <button><i class="fas fa-file-signature"></i> View</button>
+                </div>
+            </div>
+            <div class="record-card">
+                <h2>Allergy Test</h2>
+                <p><i class="fas fa-calendar-day"></i> 2024-01-18</p>
+                <p><i class="fas fa-user-md"></i> Dr. Robert Martinezz</p>
+                <p><i class="fas fa-hospital"></i> Immunology</p>
+                <div class="details">
+                    <span class="status pending">Pending</span>
+                    <button disabled><i class="fas fa-file-signature"></i> View</button>
+                </div>
+            </div>
+            <div class="record-card">
+                <h2>Electrocardiogram</h2>
+                <p><i class="fas fa-calendar-day"></i> 2024-02-20</p>
+                <p><i class="fas fa-user-md"></i> Dr. Lisa Thompson</p>
+                <p><i class="fas fa-hospital"></i> Cardiology</p>
+                <div class="details">
+                    <span class="status completed">Completed</span>
+                    <button><i class="fas fa-file-signature"></i> View</button>
+                </div>
+            </div>
+            <div class="record-card">
+                <h2>Lipid Profile</h2>
+                <p><i class="fas fa-calendar-day"></i> 2024-03-10</p>
+                <p><i class="fas fa-user-md"></i> Dr. David Walker</p>
+                <p><i class="fas fa-hospital"></i> Pathology</p>
+                <div class="details">
+                    <span class="status completed">Completed</span>
+                    <button><i class="fas fa-file-signature"></i> View</button>
+                </div>
+            </div>
+            <div class="record-card">
+                <h2>MRI Scan</h2>
+                <p><i class="fas fa-calendar-day"></i> 2024-04-05</p>
+                <p><i class="fas fa-user-md"></i> Dr. Jessica Lee</p>
+                <p><i class="fas fa-hospital"></i> Neurology</p>
+                <div class="details">
+                    <span class="status scheduled">Scheduled</span>
+                    <button disabled><i class="fas fa-file-signature"></i> View</button>
+                </div>
+            </div>
+            <!-- Add more record cards as needed -->
+        </div>
+    </div>
+</body>
+</html>

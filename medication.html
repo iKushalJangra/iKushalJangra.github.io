@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medication</title>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+        .medication-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .medication-section h2 {
+            margin-bottom: 15px;
+            color: #007BFF;
+        }
+        .medication-card {
+            background: #f1f8ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .medication-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .medication-card h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #007BFF;
+        }
+        .medication-card p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+        .medication-card .details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .medication-card .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .medication-card button {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+        .medication-card button:hover {
+            background: #0056b3;
+        }
+        .medication-card button.reminder {
+            background: #28a745;
+        }
+        .medication-card button.reminder:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="medication-section">
+            <h2><i class="fas fa-pills"></i> Medication</h2>
+            
+            <!-- Medication 1 -->
+            <div class="medication-card">
+                <h3>Amoxicillin</h3>
+                <p><i class="fas fa-prescription-bottle-alt"></i> <strong>Dosage:</strong> 500mg</p>
+                <p><i class="fas fa-clock"></i> <strong>Timings:</strong> 8:00 AM, 2:00 PM, 8:00 PM</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Duration:</strong> 7 days</p>
+                <div class="details">
+                    <div class="actions">
+                        <button><i class="fas fa-edit"></i> Edit</button>
+                        <button class="reminder"><i class="fas fa-bell"></i> Set Reminder</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medication 2 -->
+            <div class="medication-card">
+                <h3>Vitamin D</h3>
+                <p><i class="fas fa-prescription-bottle-alt"></i> <strong>Dosage:</strong> 2000 IU</p>
+                <p><i class="fas fa-clock"></i> <strong>Timings:</strong> 12:00 PM</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Duration:</strong> 30 days</p>
+                <div class="details">
+                    <div class="actions">
+                        <button><i class="fas fa-edit"></i> Edit</button>
+                        <button class="reminder"><i class="fas fa-bell"></i> Set Reminder</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medication 3 -->
+            <div class="medication-card">
+                <h3>Ibuprofen</h3>
+                <p><i class="fas fa-prescription-bottle-alt"></i> <strong>Dosage:</strong> 400mg</p>
+                <p><i class="fas fa-clock"></i> <strong>Timings:</strong> 6:00 PM</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Duration:</strong> 5 days</p>
+                <div class="details">
+                    <div class="actions">
+                        <button><i class="fas fa-edit"></i> Edit</button>
+                        <button class="reminder"><i class="fas fa-bell"></i> Set Reminder</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medication 4 -->
+            <div class="medication-card">
+                <h3>Metformin</h3>
+                <p><i class="fas fa-prescription-bottle-alt"></i> <strong>Dosage:</strong> 500mg</p>
+                <p><i class="fas fa-clock"></i> <strong>Timings:</strong> 7:00 AM, 7:00 PM</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Duration:</strong> 90 days</p>
+                <div class="details">
+                    <div class="actions">
+                        <button><i class="fas fa-edit"></i> Edit</button>
+                        <button class="reminder"><i class="fas fa-bell"></i> Set Reminder</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medication 5 -->
+            <div class="medication-card">
+                <h3>Lisinopril</h3>
+                <p><i class="fas fa-prescription-bottle-alt"></i> <strong>Dosage:</strong> 10mg</p>
+                <p><i class="fas fa-clock"></i> <strong>Timings:</strong> 8:00 AM</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Duration:</strong> 30 days</p>
+                <div class="details">
+                    <div class="actions">
+                        <button><i class="fas fa-edit"></i> Edit</button>
+                        <button class="reminder"><i class="fas fa-bell"></i> Set Reminder</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medication 6 -->
+            <div class="medication-card">
+                <h3>Atorvastatin</h3>
+                <p><i class="fas fa-prescription-bottle-alt"></i> <strong>Dosage:</strong> 20mg</p>
+                <p><i class="fas fa-clock"></i> <strong>Timings:</strong> 9:00 PM</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Duration:</strong> 30 days</p>
+                <div class="details">
+                    <div class="actions">
+                        <button><i class="fas fa-edit"></i> Edit</button>
+                        <button class="reminder"><i class="fas fa-bell"></i> Set Reminder</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medication 7 -->
+            <div class="medication-card">
+                <h3>Omeprazole</h3>
+                <p><i class="fas fa-prescription-bottle-alt"></i> <strong>Dosage:</strong> 20mg</p>
+                <p><i class="fas fa-clock"></i> <strong>Timings:</strong> 7:00 AM</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Duration:</strong> 14 days</p>
+                <div class="details">
+                    <div class="actions">
+                        <button><i class="fas fa-edit"></i> Edit</button>
+                        <button class="reminder"><i class="fas fa-bell"></i> Set Reminder</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medication 8 -->
+            <div class="medication-card">
+                <h3>Levothyroxine</h3>
+                <p><i class="fas fa-prescription-bottle-alt"></i> <strong>Dosage:</strong> 50mcg</p>
+                <p><i class="fas fa-clock"></i> <strong>Timings:</strong> 6:00 AM</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Duration:</strong> 30 days</p>
+                <div class="details">
+                    <div class="actions">
+                        <button><i class="fas fa-edit"></i> Edit</button>
+                        <button class="reminder"><i class="fas fa-bell"></i> Set Reminder</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medication 9 -->
+            <div class="medication-card">
+                <h3>Metoprolol</h3>
+                <p><i class="fas fa-prescription-bottle-alt"></i> <strong>Dosage:</strong> 50mg</p>
+                <p><i class="fas fa-clock"></i> <strong>Timings:</strong> 8:00 AM, 8:00 PM</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Duration:</strong> 30 days</p>
+                <div class="details">
+                    <div class="actions">
+                        <button><i class="fas fa-edit"></i> Edit</button>
+                        <button class="reminder"><i class="fas fa-bell"></i> Set Reminder</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medication 10 -->
+            <div class="medication-card">
+                <h3>Losartan</h3>
+                <p><i class="fas fa-prescription-bottle-alt"></i> <strong>Dosage:</strong> 50mg</p>
+                <p><i class="fas fa-clock"></i> <strong>Timings:</strong> 9:00 AM</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Duration:</strong> 30 days</p>
+                <div class="details">
+                    <div class="actions">
+                        <button><i class="fas fa-edit"></i> Edit</button>
+                        <button class="reminder"><i class="fas fa-bell"></i> Set Reminder</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

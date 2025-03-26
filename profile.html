@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kushal's Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
+        }
+        .profile-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .profile-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px 30px rgba(0, 0, 0, 0.2);
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            justify-content: space-between;
+        }
+        .profile-header img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .profile-info h1 {
+            margin: 0;
+            color: #007BFF;
+            font-size: 24px;
+        }
+        .profile-info p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #666;
+        }
+        .section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e9f7f7;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .section h3 {
+            margin: 0 0 0 15px;
+            font-size: 18px;
+            color: #333;
+        }
+        .section p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        .section a {
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        .section a:hover {
+            color: #0056b3;
+        }
+        .section button {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+            align-self: flex-end;
+        }
+        .section button:hover {
+            background: #0056b3;
+        }
+        .notification-button {
+            background: #ff7f7f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+            margin-left: 10px;
+            position: relative;
+            overflow: hidden;
+            max-width: 150px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .notification-button::before {
+            content: '\f0f3';
+            font-family: 'Font Awesome 6 Pro', sans-serif;
+            font-weight: 400;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .notification-button:hover {
+            background: #ff4d4d;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s;
+            opacity: 0.9;
+        }
+        @media (max-width: 768px) {
+            .profile-container, .section {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="https://via.placeholder.com/150" alt="Profile Picture">
+            <div class="profile-info">
+                <h1>Kushal</h1>
+                <p>User since 2020</p>
+                <p>Contact: +919050504343</p>
+                <p>Email: kushaljangra2006@gmail.com</p>
+            </div>
+            <button class="notification-button">Notifications <i class="fas fa-bell"></i></button>
+        </div>
+        <div class="section">
+            <h3>Bio</h3>
+            <p>Loves to explore the great outdoors and is passionate about health and wellness.</p>
+        </div>
+        <div class="section">
+            <h3>Medical History</h3>
+            <p>Asthma, Hypertension, Annual Check-ups</p>
+            <button>View History</button>
+        </div>
+        <div class="section">
+            <h3>Recent Activities</h3>
+            <p>50.6 km walked in the last 7 days</p>
+            <button>View Details</button>
+        </div>
+        <div class="section">
+            <h3>Social Media</h3>
+            <p>Stay connected with me:</p>
+            <a href="https://instagram.com/kushal_jangra2006"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/kushaljang708"><img src="fab fa-x" alt="X" /></a>
+            <a href="https://linkedin.com/in/kushal-jangra"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <div class="section">
+            <h3>Feedback</h3>
+            <p>What do you think of my profile?</p>
+            <textarea placeholder="Leave your feedback here..."></textarea>
+            <button>Submit Feedback</button>
+        </div>
+    </div>
+
+    <script>
+        // Animate profile information appearing
+        document.querySelectorAll('.animate-fade-in').forEach(el => {
+            el.style.opacity = 1;
+        });
+
+        // Notification button click event
+        document.querySelector('.notification-button').addEventListener('click', () => {
+            alert('Check your notifications here!');
+        });
+
+        // View History button click event
+        document.querySelector('.section button').addEventListener('click', () => {
+            alert('View your medical history.');
+        });
+
+        // Submit Feedback button click event
+        document.querySelector('.feedback button').addEventListener('click', () => {
+            const feedback = document.querySelector('.feedback textarea').value;
+            alert('Thank you for your feedback: ' + feedback);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare - Appointments</title>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .appointments-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .appointments-section h2 {
+            margin-bottom: 15px;
+            color: #007BFF;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .filter-tabs button {
+            background: none;
+            border: 1px solid #007BFF;
+            color: #007BFF;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .filter-tabs button.active {
+            background: #007BFF;
+            color: white;
+        }
+        .appointment-card {
+            background: #f1f8ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: none; /* Hide all by default */
+        }
+        .appointment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .appointment-card h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #007BFF;
+        }
+        .appointment-card p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+        .appointment-card .details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .appointment-card .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .appointment-card button {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+        .appointment-card button:hover {
+            background: #0056b3;
+        }
+        .appointment-card button.join {
+            background: #28a745;
+        }
+        .appointment-card button.join:hover {
+            background: #218838;
+        }
+        .appointment-card button.cancel {
+            background: #dc3545;
+        }
+        .appointment-card button.cancel:hover {
+            background: #c82333;
+        }
+        .new-appointment-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+        .new-appointment-btn:hover {
+            background: #218838;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+        .modal-form input,
+        .modal-form select,
+        .modal-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .modal-form button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        .modal-form button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="appointments-section">
+        <button class="new-appointment-btn"><i class="fas fa-plus"></i> New Appointment</button>
+        <h2><i class="fas fa-calendar-alt"></i> Appointments</h2>
+        <div class="filter-tabs">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+            <button class="filter-btn" data-filter="past">Past</button>
+            <button class="filter-btn" data-filter="cancelled">Cancelled</button>
+        </div>
+        <div class="appointment-list">
+            <!-- Upcoming Appointments -->
+            <div class="appointment-card upcoming">
+                <h3>Dr. Sarah Johnson</h3>
+                <p><i class="fas fa-user-md"></i> Cardiologist</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Date:</strong> Wednesday, 15 May 2025</p>
+                <p><i class="fas fa-clock"></i> <strong>Time:</strong> 10:30 AM - 11:15 AM</p>
+                <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Oakwood Medical Center</p>
+                <p><i class="fas fa-video"></i> <strong>Consultation:</strong> Virtual consultation available</p>
+                <div class="details">
+                    <button>Reschedule</button>
+                    <button class="join">Join Virtual</button>
+                </div>
+            </div>
+
+            <!-- Past Appointments -->
+            <div class="appointment-card past">
+                <h3>Dr. Michael Chen</h3>
+                <p><i class="fas fa-user-md"></i> Dermatologist</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Date:</strong> Monday, 10 April 2025</p>
+                <p><i class="fas fa-clock"></i> <strong>Time:</strong> 2:00 PM - 2:45 PM</p>
+                <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Green Valley Clinic</p>
+                <p><i class="fas fa-video"></i> <strong>Consultation:</strong> Virtual consultation available</p>
+                <div class="details">
+                    <button disabled>Reschedule</button>
+                    <button disabled class="join">Join Virtual</button>
+                </div>
+            </div>
+
+            <!-- Cancelled Appointments -->
+            <div class="appointment-card cancelled">
+                <h3>Dr. Emily Davis</h3>
+                <p><i class="fas fa-user-md"></i> General Physician</p>
+                <p><i class="fas fa-calendar-day"></i> <strong>Date:</strong> Friday, 5 April 2025</p>
+                <p><i class="fas fa-clock"></i> <strong>Time:</strong> 9:00 AM - 9:45 AM</p>
+                <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Riverside Hospital</p>
+                <p><i class="fas fa-video"></i> <strong>Consultation:</strong> Virtual consultation available</p>
+                <div class="details">
+                    <button class="cancel">Cancelled</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>New Appointment</h2>
+            <form class="modal-form">
+                <input type="text" placeholder="Patient Name" required>
+                <input type="email" placeholder="Patient Email" required>
+                <input type="tel" placeholder="Patient Phone Number" required>
+                <select required>
+                    <option value="">Select Doctor</option>
+                    <option value="dr_sarah_johnson">Dr. Sarah Johnson - Cardiologist</option>
+                    <option value="dr_michael_chen">Dr. Michael Chen - Dermatologist</option>
+                    <option value="dr_emily_davis">Dr. Emily Davis - General Physician</option>
+                </select>
+                <input type="date" placeholder="Appointment Date" required>
+                <input type="time" placeholder="Appointment Time" required>
+                <textarea placeholder="Medical Notes" required></textarea>
+                <button type="submit">Schedule Appointment</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filters = document.querySelectorAll('.filter-btn');
+            const appointments = document.querySelectorAll('.appointment-card');
+            const newAppointmentBtn = document.querySelector('.new-appointment-btn');
+            const modal = document.getElementById("myModal");
+            const span = document.getElementsByClassName("close")[0];
+
+            // Filter appointments
+            filters.forEach(filter => {
+                filter.addEventListener('click', () => {
+                    filters.forEach(btn => btn.classList.remove('active'));
+                    filter.classList.add('active');
+
+                    const filterValue = filter.getAttribute('data-filter');
+                    appointments.forEach(appointment => {
+                        if (filterValue === "all" || appointment.classList.contains(filterValue)) {
+                            appointment.style.display = "block";
+                        } else {
+                            appointment.style.display = "none";
+                        }
+                    });
+                });
+            });
+
+            // Default to show all appointments
+            document.querySelector('.filter-btn[data-filter="all"]').click();
+
+            // New appointment button click event
+            newAppointmentBtn.addEventListener('click', () => {
+                modal.style.display = "block";
+            });
+
+            // Close modal when clicking on (x) or outside the modal
+            span.onclick = () => modal.style.display = "none";
+            window.onclick = (event) => {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+
+            // Form submission
+            const form = document.querySelector('.modal-form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert("Appointment scheduled successfully!");
+                modal.style.display = "none";
+                form.reset();
+            });
+        });
+    </script>
+</body>
+</html>
